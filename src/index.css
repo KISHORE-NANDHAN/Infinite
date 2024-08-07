@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* Add this to your existing index.css file or a new CSS file */
+.logo {
+    width: 6rem; /* Adjust size as needed */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Drop shadow */
+    filter: drop-shadow(0 0 10px rgba(0, 123, 255, 0.5)); /* Glow effect */
+    transition: transform 0.3s, box-shadow 0.3s, filter 0.3s; /* Smooth transition */
+  }
+  
+  .logo:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Enhance drop shadow on hover */
+    filter: drop-shadow(0 0 15px rgba(0, 123, 255, 0.7)); /* Enhance glow on hover */
+  }
+  
