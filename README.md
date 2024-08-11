@@ -38,12 +38,17 @@ module.exports = {
 
 4. Update index.css
 In your index.css file, add the following lines to include Tailwind's base, components, and utilities styles:
-
+"
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+"
 ____________________________________________________________________________________
 
+5. added fontawesome library for Icons
+
+- npm install @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icon
+____________________________________________________________________________________---
 Installing React Router
 1. Install React Router DOM
 Run the following command to install React Router DOM:
