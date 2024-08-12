@@ -6,19 +6,23 @@ import linkedin from '../images/wired-lineal-2549-logo-linkedin.svg';
 import facebook from '../images/wired-lineal-2540-logo-facebook.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-
+import axios from 'axios';
 // Reusable Input Component
-function Input({ type = 'text', placeholder = '', value, onChange, label }) {
+function Input({ type = 'text', placeholder = '', value, onChange, label, children }) {
   return (
     <div className="mb-4">
       {label && <label className="block text-sm font-medium mb-1">{label}</label>}
-      <input
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        className="w-64 p-2 border border-gray-300 rounded"
-      />
+      <div className="relative">
+        <input
+          type={type}
+          placeholder={placeholder}
+          value={value}
+          onChange={onChange}
+          className="w-full p-2 border border-gray-300 rounded"
+          required
+        />
+        {children}
+      </div>
     </div>
   );
 }
@@ -31,7 +35,7 @@ function Select({ value, onChange, label, options }) {
       <select
         value={value}
         onChange={onChange}
-        className="w-64 p-2 border border-gray-300 rounded"
+        className="w-full p-2 border border-gray-300 rounded"
       >
         {options.map((option, index) => (
           <option key={index} value={option.value}>
@@ -56,16 +60,12 @@ function Signup() {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
-  
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission logic
-    console.log('Username:', username);
-    console.log('Email:', email);
-    console.log('Date of Birth:', dob);
-    console.log('Gender:', gender);
-    console.log('Mobile:', mobile);
-    console.log('Password:', password);
+    axios.post('/',()=>{
+      
+    })
   };
 
   return (
@@ -73,7 +73,7 @@ function Signup() {
       <div className="flex flex-col w-6/12 h-12/12 items-center bg-white p-8 rounded-lg shadow-lg">
         <img src={logo} alt="Logo" className="w-40 mb-4" />
         <h2 className="text-xl font-semibold mb-2">Create an Account</h2>
-        <form onSubmit={handleSubmit} className="w-full">
+        <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4 w-full">
           <Input
             type="text"
             placeholder="Infine_user"
@@ -113,19 +113,22 @@ function Signup() {
             onChange={(e) => setMobile(e.target.value)}
             label="Mobile:"
           />
-          <div className="mb-4 inline-flex">
-            <Input
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Enter password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              label="Password:"
-            />
-            <span onClick={togglePasswordVisibility} className="cursor-pointer ml-2 text-gray-600 absolute right-3 top-9">
+          <Input
+            type={showPassword ? 'text' : 'password'}
+            placeholder="Enter password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            label="Password:"
+          >
+            <span
+              onClick={togglePasswordVisibility}
+              className="cursor-pointer absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-600"
+            >
               <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
             </span>
-          </div>
-          <div className="text-center">
+          </Input>
+          
+          <div className="col-span-2 text-center">
             <button
               type="submit"
               className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
@@ -146,7 +149,7 @@ function Signup() {
           </button>
         </div>
       </div>
-      <div className="w-6/12 h-max mt-10">
+      <div className="w-6/12 h-max mt-20">
         <img src={signup} alt="illustration for signup" />
       </div>
     </div>
