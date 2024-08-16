@@ -7,8 +7,9 @@ import facebook from '../images/wired-lineal-2540-logo-facebook.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+
 // Reusable Input Component
-function Input({ type = 'text', placeholder = '', value, onChange, label, children }) {
+function Input({ type = 'text', placeholder = '', value, onChange, label, name, children }) {
   return (
     <div className="mb-4">
       {label && <label className="block text-sm font-medium mb-1">{label}</label>}
@@ -19,6 +20,7 @@ function Input({ type = 'text', placeholder = '', value, onChange, label, childr
           value={value}
           onChange={onChange}
           className="w-full p-2 border border-gray-300 rounded"
+          name={name}
           required
         />
         {children}
@@ -28,7 +30,7 @@ function Input({ type = 'text', placeholder = '', value, onChange, label, childr
 }
 
 // Reusable Select Component for Dropdown
-function Select({ value, onChange, label, options }) {
+function Select({ value, onChange, label, name, options }) {
   return (
     <div className="mb-4">
       {label && <label className="block text-sm font-medium mb-1">{label}</label>}
@@ -36,6 +38,7 @@ function Select({ value, onChange, label, options }) {
         value={value}
         onChange={onChange}
         className="w-full p-2 border border-gray-300 rounded"
+        name={name}
       >
         {options.map((option, index) => (
           <option key={index} value={option.value}>
@@ -49,23 +52,37 @@ function Select({ value, onChange, label, options }) {
 
 // Signup Component
 function Signup() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [dob, setDob] = useState('');
-  const [gender, setGender] = useState('');
-  const [mobile, setMobile] = useState('');
-  const [password, setPassword] = useState('');
+  const [user, setUser] = useState({
+    username: '',
+    email: '',
+    dob: '',
+    gender: '',
+    mobile: '',
+    password: ''
+  });
   const [showPassword, setShowPassword] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/',()=>{
-      
-    })
+    axios.post('http://localhost:3500/register', user)
+      .then(response => {
+        console.log('User registered:', response.data);
+      })
+      .catch(error => {
+        console.error('Error registering user:', error);
+      });
   };
 
   return (
@@ -77,28 +94,32 @@ function Signup() {
           <Input
             type="text"
             placeholder="Infine_user"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            value={user.username}
+            onChange={handleChange}
             label="Username:"
+            name="username"
           />
           <Input
             type="email"
             placeholder="user@gmail.com"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={user.email}
+            onChange={handleChange}
             label="Email:"
+            name="email"
           />
           <Input
             type="date"
             placeholder="Date of Birth"
-            value={dob}
-            onChange={(e) => setDob(e.target.value)}
+            value={user.dob}
+            onChange={handleChange}
             label="Date of Birth:"
+            name="dob"
           />
           <Select
-            value={gender}
-            onChange={(e) => setGender(e.target.value)}
+            value={user.gender}
+            onChange={handleChange}
             label="Gender:"
+            name="gender"
             options={[
               { label: 'Select Gender', value: '' },
               { label: 'Male', value: 'male' },
@@ -109,16 +130,18 @@ function Signup() {
           <Input
             type="tel"
             placeholder="1234567890"
-            value={mobile}
-            onChange={(e) => setMobile(e.target.value)}
+            value={user.mobile}
+            onChange={handleChange}
             label="Mobile:"
+            name="mobile"
           />
           <Input
             type={showPassword ? 'text' : 'password'}
             placeholder="Enter password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            value={user.password}
+            onChange={handleChange}
             label="Password:"
+            name="password"
           >
             <span
               onClick={togglePasswordVisibility}
@@ -127,7 +150,7 @@ function Signup() {
               <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
             </span>
           </Input>
-          
+
           <div className="col-span-2 text-center">
             <button
               type="submit"
