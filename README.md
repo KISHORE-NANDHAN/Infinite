@@ -77,7 +77,7 @@ npm install react-router-dom
 
 ---
 ## installing react axios
-\```bash
+```bash
 npm install axios
-\```
+```
 This guide should help you set up your React application with Tailwind CSS, FontAwesome for icons, and React Router for routing. 
