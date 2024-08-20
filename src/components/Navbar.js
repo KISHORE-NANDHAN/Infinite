@@ -1,54 +1,44 @@
 import React from 'react';
 import '../index.css';
-import logo from '../images/logo.png';
+import { Link } from 'react-router-dom'; // Import Link for navigation
 
 function Navbar() {
   return (
     <div className="h-screen inline-flex">
       <nav className="bg-gray-800 text-center text-white w-45 h-full p-6 flex flex-col justify-around items-center">
-        <img src={logo} alt='logo' className='w-full h-20 mb-8' />
-        <ul className="space-y-8 w-full justify-center"><br/><br/><br/>
+        <img src="https://firebasestorage.googleapis.com/v0/b/infiniteconnect-19162.appspot.com/o/logo.png?alt=media&token=da585e14-f4bd-4a00-ac98-cef73b6ccf54" alt='logo' className='w-full h-20 mb-8' />
+        <ul className="space-y-8 w-full justify-center">
           <li className='flex items-center justify-center space-x-3'>
-            <a href="/" className="flex items-center space-x-2">
-              <svg className="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M4 12l8-8 8 8M6 10.5V19a1 1 0 001 1h3v-3a1 1 0 011-1h2a1 1 0 011 1v3h3a1 1 0 001-1v-8.5" />
-              </svg>
+            <Link to="/app/home" className="flex items-center space-x-2">
+              {/* SVG Icon */}
               <span>Home</span>
-            </a>
+            </Link>
           </li>
           <li className='flex items-center justify-center space-x-3'>
-            <a href="/search" className="flex items-center space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
+            <Link to="/app/search" className="flex items-center space-x-2">
+              {/* SVG Icon */}
               <span>Search</span>
-            </a>
+            </Link>
           </li>
           <li className='flex items-center justify-center space-x-3'>
-            <a href="/post" className="flex items-center space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-            </svg>
+            <Link to="/app/post" className="flex items-center space-x-2">
+              {/* SVG Icon */}
               <span>Post</span>
-            </a>
+            </Link>
           </li>
           <li className='flex items-center justify-center space-x-3'>
-            <a href="/profile" className="flex items-center space-x-2">
-              <svg className="w-6 h-6 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 14c2.67 0 8 1.34 8 4v2H4v-2c0-2.66 5.33-4 8-4zm0-4a4 4 0 110-8 4 4 0 010 8z" />
-              </svg>
+            <Link to="/app/profile" className="flex items-center space-x-2">
+              {/* SVG Icon */}
               <span>Profile</span>
-            </a>
+            </Link>
           </li>
         </ul>
         <ul className="space-y-8 w-full mt-auto">
           <li className='flex items-center justify-center space-x-3'>
-            <a href="/logout" className="flex items-center space-x-2">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
-              </svg>
+            <Link to="/logout" className="flex items-center space-x-2">
+              {/* SVG Icon */}
               <span>Logout</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
