@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Routes, Route} from 'react-router-dom';
+import { UserProvider } from './context/UserContext.js';
+import { ThemeProvider} from './context/ThemeContext.js';
 import Navbar from './components/Navbar';
 import Home from './pages/Home.js';
 import Search from './pages/Search.js';
@@ -9,7 +11,9 @@ import NotFound from './pages/NotFound.js';
 
 function App() {
   return (
-    <div className='App h-screen flex'>
+    <UserProvider>
+      <ThemeProvider> 
+      <div className='App h-screen flex'>
       <Navbar />
       <div className="flex-grow p-6">
         <Routes>
@@ -21,6 +25,9 @@ function App() {
         </Routes>
       </div>
     </div>
+      </ThemeProvider>
+    </UserProvider>
+    
   );
 }
 

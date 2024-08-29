@@ -29,25 +29,24 @@ function Login() {
     setShowPassword(!showPassword);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3500/login', data)
-      .then(response => {
-        console.log('User registered:', response.data);
-        if (response.status === 200) {
-          alert('User registered successfully');
-          window.location.href = '/app/home';
-        }
-      })
-      .catch(error => {
-        if (error.response) {
-          const errorMessage = error.response.data.message;
-          alert(`Error: ${errorMessage}`);
-        } else {
-          console.error('Error registering user:', error);
-          alert('An unexpected error occurred. Please try again later.');
-        }
-      });
+    try {
+      const response = await axios.post('http://localhost:3500/login', data, { withCredentials: true });
+      if (response.status === 200) {
+        console.log('Login successful:', response.data);
+        alert('Login successful');
+        window.location.href = '/app/home'; // Redirect to home after successful login
+      }
+    } catch (error) {
+      if (error.response) {
+        const errorMessage = error.response.data.message;
+        alert(`Error: ${errorMessage}`);
+      } else {
+        console.error('Error during login:', error);
+        alert('An unexpected error occurred. Please try again later.');
+      }
+    }
   };
 
   return (
@@ -106,7 +105,7 @@ function Login() {
           </div>
         </form>
         <div className="mt-8 flex justify-center space-x-4">
-        <button className="w-10 h-10 rounded bg-white-100 shadow">
+          <button className="w-10 h-10 rounded bg-white-100 shadow">
             <img src="https://firebasestorage.googleapis.com/v0/b/infiniteconnect-19162.appspot.com/o/icons8-google.svg?alt=media&token=a6c9dd7d-35c7-45e1-845f-a1810a19636e" alt="google" />
           </button>
           <button className="w-10 h-10 rounded bg-white-100 shadow">
