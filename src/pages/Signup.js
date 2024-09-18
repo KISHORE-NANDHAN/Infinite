@@ -33,7 +33,7 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3500/register', user)
+    axios.post('http://localhost:3500/auth/register', user)
       .then(response => {
         console.log('User registered:', response.data);
         if (response.status === 201) {

@@ -31,7 +31,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('http://localhost:3500/login', data)
+    axios.post('http://localhost:3500/auth/login', data)
       .then(response => {
         console.log('User registered:', response.data);
         if (response.status === 200) {
