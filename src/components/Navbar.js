@@ -18,22 +18,22 @@ function Navbar() {
         {/* Navigation Links */}
         <ul className="space-y-8 flex-grow flex flex-col justify-center items-center">
           <li className="flex items-center justify-center space-x-3">
-            <Link to="/home" className="flex items-center space-x-2">
+            <Link to="/app/home" className="flex items-center space-x-2">
               <span>Home</span>
             </Link>
           </li>
           <li className="flex items-center justify-center space-x-3">
-            <Link to="/search" className="flex items-center space-x-2">
+            <Link to="/app/search" className="flex items-center space-x-2">
               <span>Search</span>
             </Link>
           </li>
           <li className="flex items-center justify-center space-x-3">
-            <Link to="/post" className="flex items-center space-x-2">
+            <Link to="/app/post" className="flex items-center space-x-2">
               <span>Post</span>
             </Link>
           </li>
           <li className="flex items-center justify-center space-x-3">
-            <Link to="/profile" className="flex items-center space-x-2">
+            <Link to="/app/profile" className="flex items-center space-x-2">
               <span>Profile</span>
             </Link>
           </li>
@@ -52,10 +52,10 @@ function Navbar() {
           {showMore && (
             <ul className="absolute left-full top-0 bg-gray-700 rounded-md shadow-lg space-y-2 w-40">
               <li className="hover:bg-gray-600 p-2 rounded-md">
-                <Link to="/aboutus">About Us</Link>
+                <Link to="aboutus">About Us</Link>
               </li>
               <li className="hover:bg-gray-600 p-2 rounded-md">
-                <Link to="/update-user">Update User</Link>
+                <Link to="/app/update-user">Update User</Link>
               </li>
               <li className="hover:bg-gray-600 p-2 rounded-md">
                 <span>Dark Mode Toggle (Dummy)</span>

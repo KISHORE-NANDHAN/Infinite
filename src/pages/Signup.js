@@ -38,7 +38,7 @@ function Signup() {
         console.log('User registered:', response.data);
         if (response.status === 201) {
           alert('User registered successfully');
-          window.location.href = '/login'
+          window.location.href = '/'
         }
       })
       .catch(error => {
@@ -171,7 +171,7 @@ function Signup() {
               Submit
             </button>
             <p className="mt-8">
-              Already have an account? <a href="/login" className="text-blue-500 ">Login</a>
+              Already have an account? <a href="/" className="text-blue-500 ">Login</a>
             </p>
           </div>
         </form>

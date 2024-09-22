@@ -3,6 +3,8 @@ import '../index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function Login() {
   const [data, setData] = useState({
@@ -10,6 +12,8 @@ function Login() {
     password: '',
   });
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
 
   const handlePasswordChange = (e) => {
     setData({
@@ -33,10 +37,14 @@ function Login() {
     e.preventDefault();
     axios.post('http://localhost:3500/auth/login', data)
       .then(response => {
-        console.log('User registered:', response.data);
+        console.log('User logged in:', response.data);
+        
         if (response.status === 200) {
-          alert('User registered successfully');
-          window.location.href = '/app/home';
+         
+          Cookies.set('session_token',response.data.user.Id);
+          console.log(Cookies.get('session_token'));
+          alert('User logged in successfully');
+          navigate('/app/home');
         }
       })
       .catch(error => {
@@ -44,7 +52,7 @@ function Login() {
           const errorMessage = error.response.data.message;
           alert(`Error: ${errorMessage}`);
         } else {
-          console.error('Error registering user:', error);
+          console.error('Error logging in user:', error);
           alert('An unexpected error occurred. Please try again later.');
         }
       });
@@ -106,7 +114,7 @@ function Login() {
           </div>
         </form>
         <div className="mt-8 flex justify-center space-x-4">
-        <button className="w-10 h-10 rounded bg-white-100 shadow">
+          <button className="w-10 h-10 rounded bg-white-100 shadow">
             <img src="https://firebasestorage.googleapis.com/v0/b/infiniteconnect-19162.appspot.com/o/icons8-google.svg?alt=media&token=a6c9dd7d-35c7-45e1-845f-a1810a19636e" alt="google" />
           </button>
           <button className="w-10 h-10 rounded bg-white-100 shadow">
